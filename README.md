@@ -1,2 +1,2 @@
-# Pokedéx
+# Pokédex
 Banco de dados
