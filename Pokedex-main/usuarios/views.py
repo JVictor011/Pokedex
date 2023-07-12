@@ -118,3 +118,16 @@ def addItens(request):
             messages.add_message(request, constants.ERROR, 'Não foi possível adicionar o item')
             return render(request, 'addItens.html')
         
+def visao(request):
+    if request.method == "GET":
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT nome, total_pokemon FROM treinador_pokemon_count")
+            results = cursor.fetchall()
+
+        return render(request, 'visao.html', {'results': results})
+    else:        
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT nome, total_pokemon FROM treinador_pokemon_count")
+            results = cursor.fetchall()
+
+        return render(request, 'visao.html', {'results': results})

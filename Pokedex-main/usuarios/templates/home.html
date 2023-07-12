@@ -26,6 +26,9 @@
                       <li class="nav-item">
                         <a class="nav-link" onclick="redirecionarInsertItens()">Adicionar Itens</a>
                       </li>
+                      <li class="nav-item">
+                        <a class="nav-link" onclick="redirecionarvisao()">Visão</a>
+                      </li>
                       <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           Instagram
@@ -54,7 +57,7 @@
               <div class="container">
                 
                 {% if home %}
-                    <p>Search results for: <strong>{{ home }}</strong></p>
+                    <p>Resultado da pesquisa: <strong>{{ home }}</strong></p>
                 {% endif %}
                 
                 <table class="table">
@@ -101,6 +104,9 @@
       }
       function redirecionarInsertItens(){
         window.location.href = "{% url 'addItens' %}";
+      }
+      function redirecionarvisao(){
+        window.location.href = "{% url 'visao' %}";
       }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
