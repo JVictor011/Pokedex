@@ -29,6 +29,10 @@
 
 .container {
     min-height: 100%;
+    color: black;
+}
+.table{
+    color: black;
 }
 
 .bg-side{
@@ -65,8 +69,13 @@
     font-weight: bold;
 }
 
-.btn-outline-success{
-    background-color: #d14646;
+.btn-outline-success {
+    background-color: #dc3545; 
     border-color: white;
-    color: black;
-}
+    color: white;
+    &:hover {
+      background-color: #dc3545;
+      border-color: white;
+      color: white; 
+    }
+  }

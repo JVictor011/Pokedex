@@ -1,2 +1,0 @@
-# Pokédex
-Banco de dados
