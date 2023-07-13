@@ -91,7 +91,6 @@ def addItens(request):
     if request.method == "GET":
         return render(request, 'addItens.html')
     else:
-        print('12121212')
         cod_item = request.POST.get('cod_item')
         nome = request.POST.get('nome')
         preco = request.POST.get('preco')
@@ -100,13 +99,6 @@ def addItens(request):
         categoria = request.POST.get('categoria')
 
         try:
-            print("3232323232")
-            print(nome)
-            print(preco)
-            print(efeito)
-            print(descricao)
-            print(categoria)
-            print(cod_item)
             with connection.cursor() as cursor:
                 cursor.execute(
                     "INSERT INTO itens (Cod_Item, Nome, Preco, Efeito, Descricao, Categoria) VALUES (%s, %s, %s, %s, %s, %s)",
@@ -131,3 +123,45 @@ def visao(request):
             results = cursor.fetchall()
 
         return render(request, 'visao.html', {'results': results})
+    
+def addPoke(request):
+    if request.method == "GET":
+        return render(request, 'addPokemon.html')
+    else:
+        matricula = request.POST.get('matricula')
+        nome = request.POST.get('nome')
+        id_num = request.POST.get('id_num')
+        nivel = request.POST.get('nivel')
+        sexo = request.POST.get('sexo')
+        velocidade = request.POST.get('velocidade')
+        defesa = request.POST.get('defesa')
+
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute("INSERT INTO public.pokemon(id_num, nome, nivel, sexo, velocidade, defesa, matricula) VALUES (%s, %s, %s, %s, %s, %s, %s)", [id_num, nome, nivel, sexo, velocidade, defesa, matricula])
+                cursor.close()
+            messages.add_message(request, constants.SUCCESS, 'Sucesso!')
+            return render(request, 'addPokemon.html')
+        except Exception as e:
+            messages.add_message(request, constants.ERROR, 'Não foi possível adicionar o pokemon')
+            return render(request, 'addPokemon.html')
+    
+def addinfopoke(request):
+    if request.method == "GET":
+        return render(request, 'addinfopoke.html')
+    else:
+        ginasio = request.POST.get('ginasio')
+        regiao_cap = request.POST.get('regiao_cap')
+        nome = request.POST.get('nome')
+        descr_pok = request.POST.get('descr_pok')
+        cod_ins = request.POST.get('cod_ins')
+        
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute("INSERT INTO public.info_pokemon(nome, regiao_capt, ginasio, descr_pok, cod_ins)VALUES (%s, %s, %s, %s, %s)", [nome, regiao_cap, ginasio, descr_pok, cod_ins])
+                cursor.close()
+            messages.add_message(request, constants.ERROR, 'Sucesso!')
+            return render(request, 'addinfopoke.html')
+        except Exception as e:
+            messages.add_message(request, constants.ERROR, 'Não foi possível adicionar a info')
+            return render(request, 'addinfopoke.html')

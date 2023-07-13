@@ -29,6 +29,12 @@
                       <li class="nav-item">
                         <a class="nav-link" onclick="redirecionarvisao()">Visão</a>
                       </li>
+                      <li class="nav-item">
+                        <a class="nav-link" onclick="redirecionaraddpokemon()">Add Pokemon</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" onclick="redirecionarinfopoke()">Add Info Pokemon</a>
+                      </li>
                       <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           Instagram
@@ -96,6 +102,12 @@
         </div>
 
     <script>
+      function redirecionarinfopoke() {
+        window.location.href = "{% url 'addinfopoke' %}"
+      }
+      function redirecionaraddpokemon() {
+        window.location.href = "{% url 'addPoke' %}"
+      }
       function redirecionar() {
         window.location.href = "{% url 'home' %}";
       }

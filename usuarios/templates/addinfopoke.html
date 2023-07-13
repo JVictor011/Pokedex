@@ -67,7 +67,7 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-5 bg-side">
-                    <form action="{% url 'addPoke' %}" method="POST">{% csrf_token %}
+                    <form action="{% url 'addinfopoke' %}" method="POST">{% csrf_token %}
                         <div class="row">
                             {% if messages %}
                                 {% for message in messages %}
@@ -76,28 +76,21 @@
                                     </div>
                                 {% endfor %}
                             {% endif %}
-                            <div class="col-md-12">
-                                <label for="Matricula">Matricula:</label>
-                                <input type="text" class="form-control" placeholder="Digite seu Matricula..." name="matricula" id="matricula"><br>
-                            </div>
                             <div class="col-md-6">
+                                <label for="ginasio">Ginasio:</label>
+                                <input type="text" class="form-control" placeholder="Digite sua ginasio..." name="ginasio" id="ginasio"><br>
+
+                                <label for="regiao_cap">Região de captura:</label>
+                                <input type="text" class="form-control" placeholder="Digite seu regiao_cap..." name="regiao_cap" id="regiao_cap"><br>
+
                                 <label for="nome">Nome:</label>
                                 <input type="text" class="form-control" placeholder="Digite seu nome..." name="nome" id="nome"><br>
 
-                                <label for="id_num">Id_num:</label>
-                                <input type="text" class="form-control" placeholder="Digite sua id_num..." name="id_num" id="id_num"><br>
+                                <label for="descr_pok">Descrição:</label>
+                                <input type="text" class="form-control" placeholder="Digite seu descr_pok..." name="descr_pok" id="descr_pok"><br>
 
-                                <label for="nivel">Nivel:</label>
-                                <input type="text" class="form-control" placeholder="Digite seu nivel..." name="nivel" id="nivel"><br>
-
-                                <label for="sexo">Sexo:</label>
-                                <input type="text" class="form-control" placeholder="Digite sua sexo..." name="sexo" id="sexo"><br>
-
-                                <label for="velocidade">Velocidade:</label>
-                                <input type="text" class="form-control" placeholder="Digite sua velocidade..." name="velocidade" id="velocidade"><br>
-
-                                <label for="defesa">Defesa:</label>
-                                <input type="text" class="form-control" placeholder="Digite seu objetivo de defesa..." name="defesa" id="defesa"><br>
+                                <label for="cod_ins">Cod insignia:</label>
+                                <input type="text" class="form-control" placeholder="Digite seu cod_ins..." name="cod_ins" id="cod_ins"><br>
                             </div>
                         </div>
                         <input type="submit" value="CADASTRAR">
