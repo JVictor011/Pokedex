@@ -138,7 +138,7 @@ def addPoke(request):
 
         try:
             with connection.cursor() as cursor:
-                cursor.execute("INSERT INTO public.pokemon(id_num, nome, nivel, sexo, velocidade, defesa, matricula) VALUES (%s, %s, %s, %s, %s, %s, %s)", [id_num, nome, nivel, sexo, velocidade, defesa, matricula])
+                cursor.execute("INSERT INTO pokemon(id_num, nome, nivel, sexo, velocidade, defesa, matricula) VALUES (%s, %s, %s, %s, %s, %s, %s)", [id_num, nome, nivel, sexo, velocidade, defesa, matricula])
                 cursor.close()
             messages.add_message(request, constants.SUCCESS, 'Sucesso!')
             return render(request, 'addPokemon.html')
@@ -158,10 +158,32 @@ def addinfopoke(request):
         
         try:
             with connection.cursor() as cursor:
-                cursor.execute("INSERT INTO public.info_pokemon(nome, regiao_capt, ginasio, descr_pok, cod_ins)VALUES (%s, %s, %s, %s, %s)", [nome, regiao_cap, ginasio, descr_pok, cod_ins])
+                cursor.execute("INSERT INTO info_pokemon(nome, regiao_capt, ginasio, descr_pok, cod_ins)VALUES (%s, %s, %s, %s, %s)", [nome, regiao_cap, ginasio, descr_pok, cod_ins])
                 cursor.close()
             messages.add_message(request, constants.ERROR, 'Sucesso!')
             return render(request, 'addinfopoke.html')
         except Exception as e:
             messages.add_message(request, constants.ERROR, 'Não foi possível adicionar a info')
             return render(request, 'addinfopoke.html')
+
+def updatePokemon(request):
+    if request.method == "GET":
+        return render(request, 'uploadPokemon.html')
+    else:
+        matricula = request.POST.get('matricula')
+        nome = request.POST.get('nome')
+        id_num = request.POST.get('id_num')
+        nivel = request.POST.get('nivel')
+        sexo = request.POST.get('sexo')
+        velocidade = request.POST.get('velocidade')
+        defesa = request.POST.get('defesa')
+
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute("UPDATE public.pokemon SET nome = %s, id_num = %s, nivel = %s, sexo = %s, velocidade = %s, defesa = %s WHERE matricula = %s", [nome, id_num, nivel, sexo, velocidade, defesa, matricula])
+                cursor.close()
+            messages.add_message(request, constants.SUCCESS, 'Pokemon atualizado com sucesso!')
+            return render(request, 'uploadPokemon.html')
+        except Exception as e:
+            messages.add_message(request, constants.ERROR, 'Não foi possível atualizar o pokemon')
+            return render(request, 'uploadPokemon.html')
