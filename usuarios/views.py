@@ -5,6 +5,7 @@ from django.db import connection
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+import csv #usar csv para dar continuidade com a aplicação sendo usado para inserções em massa
 
 
 def logar(request):
