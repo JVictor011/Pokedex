@@ -14,8 +14,6 @@ def logar(request):
     else:
         username = request.POST.get('user')
         password = request.POST.get('password')
-        print(username)
-        print(password)
         
         if not username.strip() or not password.strip():
             messages.add_message(request, constants.ERROR, 'Preencha todos os campos')
@@ -39,6 +37,7 @@ def home(request):
         with connection.cursor() as cursor:
             cursor.execute("SELECT id_num, nome, nivel, sexo, velocidade, defesa, matricula FROM pokemon WHERE nome LIKE %s", ['%' + search_query + '%'])
             results = cursor.fetchall()
+            cursor.close()
 
         return render(request, 'home.html', {'results': results, 'home': search_query})
 
@@ -52,6 +51,7 @@ def deletePokemon(request, pokemon_id):
                 "DELETE FROM pokemon WHERE id_num = %s",
                 [pokemon_id]
             )
+            cursor.close()
         return redirect("/auth/home/")
 
 def addTreinador(request):
@@ -82,6 +82,7 @@ def addTreinador(request):
                     "INSERT INTO treinador (matricula, nome, idade, email, senha, notas_pess, obj_captu, cpf, favorito1, favorito2, favorito3, favorito4, favorito5, favorito6) "
                     "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",[matricula, nome, idade, email, senha, notas_pess, obj_captu, cpf, favorito1, favorito2, favorito3, favorito4, favorito5, favorito6]
                 )
+                cursor.close()
             messages.add_message(request, constants.SUCCESS, 'Usuário criado com sucesso')
             return render(request, 'addTreinador.html')
         except Exception as e:
@@ -105,6 +106,7 @@ def addItens(request):
                     "INSERT INTO itens (Cod_Item, Nome, Preco, Efeito, Descricao, Categoria) VALUES (%s, %s, %s, %s, %s, %s)",
                     [cod_item, nome, preco, efeito, descricao, categoria]
                 )
+                cursor.close()
             messages.add_message(request, constants.SUCCESS, 'Item adicionado')
             return render(request, 'addItens.html')
         except Exception as e:
@@ -116,12 +118,14 @@ def visao(request):
         with connection.cursor() as cursor:
             cursor.execute("SELECT nome, total_pokemon FROM treinador_pokemon_count")
             results = cursor.fetchall()
+            cursor.close()
 
         return render(request, 'visao.html', {'results': results})
     else:        
         with connection.cursor() as cursor:
             cursor.execute("SELECT nome, total_pokemon FROM treinador_pokemon_count")
             results = cursor.fetchall()
+            cursor.close()
 
         return render(request, 'visao.html', {'results': results})
     
